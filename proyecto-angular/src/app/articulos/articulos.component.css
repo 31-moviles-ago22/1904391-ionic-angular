@@ -1,0 +1,9 @@
+ion-col {}
+
+ion-button {
+    width: 100%;
+}
+
+ion-col p {
+    font-weight: bold;
+}

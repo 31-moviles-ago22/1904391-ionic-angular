@@ -1,0 +1,40 @@
+<ion-grid>
+    <ion-row>
+        <ion-col size="4">
+            <ion-card>
+                <ion-card-content>
+                    <p>{{articuloDetalle.nombre}}</p>
+                    <ion-img [src]="articuloDetalle.imagen"></ion-img>
+
+                </ion-card-content>
+
+            </ion-card>
+        </ion-col>
+        <ion-col size="4">
+            <h2>Comprar {{articuloDetalle.nombre}}</h2>
+            <p>${{articuloDetalle.precio}}</p>
+        </ion-col>
+        <ion-col size="3">
+            <p>Entrega <strong>GRATIS</strong> hoy </p>
+            <ion-list>
+                <ion-item>
+                    <ion-select interface="popover" placeholder="Cantidad">
+                        <ion-select-option value="1">1</ion-select-option>
+                        <ion-select-option value="2">2</ion-select-option>
+                        <ion-select-option value="3">3</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-list>
+            <ion-button>Agregar al carrito</ion-button>
+            <ion-button>Comprar ya</ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <h2>Reviews</h2>
+            <p class="review" *ngFor="let review of articuloDetalle.reviews">
+                {{review}}
+            </p>
+        </ion-col>
+    </ion-row>
+</ion-grid>
