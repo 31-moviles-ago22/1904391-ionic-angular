@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { createDonutChart} from '../../libs/donut.js';
+import { donutInit,renderDonut} from '../../libs/donut.js';
 
 @Component({
   selector: 'app-donut',
@@ -41,12 +41,13 @@ export class DonutComponent implements OnInit {
 
     let data = this.donutData;
 
-    createDonutChart(data);
+    //createDonutChart(data);
 
     console.log("afterViewContentInit");
     document.onreadystatechange = function () {
       if( document.readyState === 'complete' ){
-
+        donutInit();
+        renderDonut(data);
       }
     };
 

@@ -1,9 +1,42 @@
+const domSelector = "donut-chart";
+const domSelectorInitialized = domSelector + '--initialized';
+
+
+//Class
+class Donut {
+    constructor(el, index) {
+        this.el = el;
+        this.index = index || el.getAttribute('id') || Math.floor(Math.random() * Math.floor(10000));
+        this.initialized = false;
+        this.init(el);
+    }
+
+
+    init() {
+        this.initialized = true;
+        this.el.classList.add(domSelectorInitialized);
+        this.el.setAttribute("id", `donut-chart--${generateRandomString(3)}`);
+
+        this.renderDonut();
+    }
+
+}
+
+function donutInit() {
+    const elsNew = document.querySelectorAll('.' + domSelector + ':not(.' + domSelectorInitialized + ')');
+    if (elsNew.length) {
+        elsNew.forEach(function(el, index) {
+            new Donut(el, index);
+        });
+    }
+}
+
 function stringToHTMLNSFrag(strHTML) {
-    var temp = document.createElementNS("http://www.w3.org/2000/svg", "template");
+    //var temp = document.createElementNS("http://www.w3.org/2000/svg", "template");
+    var temp = document.createElement("template");
     temp.innerHTML = strHTML;
     return temp.content;
 }
-
 
 
 function generateRandomString(n) {
@@ -17,77 +50,70 @@ function generateRandomString(n) {
 }
 
 
+const renderDonut = function(options) {
+    options = options || {};
+    options.domScope = document;
+    console.log(options);
+    if (options) {
+        let donutContainer = document.getElementById(options.container);
+        let svgId = "donut-" + generateRandomString(3);
+
+        let svgTemplate = `<svg width="40%" height="300px"
+        xmlns="http://www.w3.org/2000/svg" viewBox="0 0  50 50"
+        role="img" title="Your total balance status" aria-describedby="${donutData.title}" 
+        id="${svgId}"></svg>`; //svgId needs to come from donut ID random generated id on donutInit-- WIP
+
+        let newSVG = stringToHTMLNSFrag(svgTemplate); //stringToHTMLNSFrag(`<p><p>`);
+
+        donutContainer.appendChild(newSVG);
+    }
+}
+
 const createDonutChart = function(donutData) {
-    console.log(donutData);
     //Create SVG for chart
     const svgContainer = document.getElementById("donut");
     let svgId = "donut-" + generateRandomString(3);
 
-    let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("width", "40%"); //50%
-    svg.setAttribute("height", "300px");
-    svg.setAttribute("viewBox", "0 0 50 50");
-    svg.setAttribute("role", "img");
-    svg.setAttribute("title", "Your total balance status")
-    svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    svg.setAttribute("aria-describedby", donutData.title);
-    svg.setAttribute("id", svgId);
 
-    //let figure = document.createElement("figure");
-    //figure.style.width="45%";
+    //Need a FN that returns this template
+    let svgTemplate = `<svg width="40%" height="300px"
+        xmlns="http://www.w3.org/2000/svg" viewBox="0 0  50 50"
+        role="img" title="Your total balance status" aria-describedby="${donutData.title}" 
+        id="${svgId}"></svg>`; //svgId needs to come from donut ID random generated id on donutInit-- WIP
 
-    const donutHole = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    donutHole.setAttribute("cx", "25");
-    donutHole.setAttribute("cy", "25");
-    donutHole.setAttribute("r", "15.91");
-    donutHole.setAttribute("fill", "#FFF");
-    donutHole.setAttribute("class", "donut-hole");
-    //let donutHole = `<circle cx="50" cy="50" r="15.91" fill="#FFF" class="donut-hole"/></circle>`;
-    //let donutRing = `<circle cx="50" cy="50" r="15.91" fill="transparent" stroke="#d2d3d4" class="donut-ring" stroke-width="3"/></circle>`;
+    let newSVG = stringToHTMLNSFrag(svgTemplate); //stringToHTMLNSFrag(`<p><p>`);
 
-    const donutRing = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    donutRing.setAttribute("cx", "25");
-    donutRing.setAttribute("cy", "25");
-    donutRing.setAttribute("r", "15.91");
-    donutRing.setAttribute("fill", "transparent");
-    donutRing.setAttribute("stroke", "#FFF"); //#d2d3d4
-    donutRing.setAttribute("stroke-width", "3");
-    donutRing.setAttribute("class", "donut-ring");
+    svgContainer.appendChild(newSVG);
 
 
-    svg.append(donutHole);
-    svg.append(donutRing);
+    const donutHole = `<circle cx="25" cy="25" r="15.91" fill="#FFF" class="donut-hole"/></circle>`;
+    const donutRing = `<circle cx="25" cy="25" r="15.91" fill="transparent" stroke="#FFF" class="donut-ring" stroke-width="3"/></circle>`; //#d2d3d4
+
+    let newDonutHole = stringToHTMLNSFrag(donutHole);
+    let newDonutRing = stringToHTMLNSFrag(donutRing);
+
+
+    svgContainer.insertBefore(newDonutHole, newSvg);
+    svgContainer.insertBefore(newDonutRing, newSVG);
+
+    //newSVG.append(newDonutHole);
+    //newSvg.append(newDonutRing);
 
     //Creates all donut segments based on data
     [].forEach.call(donutData.data, function(el) {
 
         let percentage = parseInt((el.x * 100) / donutData.base);
+
+
         let difference = 100 - percentage;
         let ariaLabel = el.name + " " + el.x + " dollars"; // we can furtherly add another value to data if it's curency/points/other values
 
-        let segment = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-        segment.setAttribute("cx", "25");
-        segment.setAttribute("cy", "25");
-        segment.setAttribute("r", "15.91");
-        segment.setAttribute("fill", "transparent");
-        segment.setAttribute("stroke-dasharray", `${percentage} ${difference}`);
-        segment.setAttribute("stroke", el.color);
-        segment.setAttribute("stroke-width", "3");
-        segment.setAttribute("class", "donut-segment");
-        segment.setAttribute("tabindex", "0");
-        segment.setAttribute("aria-label", ariaLabel); //TBI: To be Improved - at the moment it receives it from data but we want it to be provided by the annotations which needs to be populated first
+        let segmentTemplate = `<circle cx="25" cy="25" r="15.91" fill="transparent" stroke-dasharray="${percentage} ${difference}"
+          stroke="${el.color}" stroke-width="3" class="donut-segment" tabindex="0" aria-label="${ariaLabel}">
+          <title>${el.name}</title>
+          <desc>${el.x} of ${donutData.base}</desc></circle>`;
 
-        let segmentTitle = document.createElementNS("http://www.w3.org/2000/svg", "title");
-        segmentTitle.innerHTML = el.name;
-        let segmentDescription = document.createElementNS("http://www.w3.org/2000/svg", "desc");
-        segmentDescription.innerHTML = el.x + " of " + donutData.base;
-
-        segment.appendChild(segmentTitle);
-        segment.appendChild(segmentDescription);
-
-        //let newCircle = stringToHTMLFrag(segmentTemplate);
-
-        svg.appendChild(segment);
+        //svg.appendChild(segmentTemplate); //segment
     });
 
 
@@ -208,36 +234,31 @@ const createDonutChart = function(donutData) {
     let g = document.createElementNS("http://www.w3.org/2000/svg", "g");
     g.setAttribute("class", "donut-legend");
 
-    let legendNumber = `<text x="50%" y="50%" class="donut-number">${donutData.base}</text>`;
-    let legendLabel = `<text x="50%" y="50%" class="donut-label">Total balance</text>`;
+    let legendNumber = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    legendNumber.setAttribute("x", "50%");
+    legendNumber.setAttribute("y", "50%");
+    legendNumber.setAttribute("class", "donut-number");
 
-    let number = stringToHTMLNSFrag(legendNumber);
-    let label = stringToHTMLNSFrag(legendLabel);
+    let legendLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    legendLabel.setAttribute("x", "50%");
+    legendLabel.setAttribute("y", "50%");
+    legendLabel.setAttribute("class", "donut-label");
 
-    // let legendNumber = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    // legendNumber.setAttribute("x", "50%");
-    // legendNumber.setAttribute("y", "50%");
-    // legendNumber.setAttribute("class", "donut-number");
+    legendNumber.innerHTML = donutData.base;
+    legendLabel.innerHTML = "Total Balance";
 
-    // let legendLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    // legendLabel.setAttribute("x", "50%");
-    // legendLabel.setAttribute("y", "50%");
-    // legendLabel.setAttribute("class", "donut-label");
-
-    //legendNumber.innerHTML = donutData.base;
-    //legendLabel.innerHTML = "Total Balance";
-
-    //g.appendChild(legendNumber);
-    // g.appendChild(legendLabel);
-
-    g.appendChild(number);
-    g.appendChild(label);
+    g.appendChild(legendNumber);
+    g.appendChild(legendLabel);
 
     svg.appendChild(g);
+
 }
 
 
 
 export {
-    createDonutChart
+    createDonutChart,
+    donutInit,
+    Donut,
+    renderDonut,
 }
