@@ -1,5 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AgregarCarritoService } from '../agregar-carrito.service';
+
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
+
+export interface Articulo{ 
+  nombre: string;
+  precio: number;
+}
+
 @Component({
   selector: 'app-articulos',
   templateUrl: './articulos.component.html',
@@ -7,11 +17,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticulosComponent implements OnInit {
 
-  constructor() { }
+  //private articulosCollection: AngularFirestoreCollection<Articulo>;
+  //arts: Observable<Articulo[]>; 
 
-  ngOnInit(): void {
+
+  private coleccionFirebase: AngularFirestoreCollection<Articulo>;
+  articulosFirebase: Observable<Articulo[]>;
+
+  private test: AngularFirestoreCollection<Articulo>;
+
+  constructor(
+    private carritoService : AgregarCarritoService,
+    private aFirestore: AngularFirestore
+
+  ) { 
+    this.coleccionFirebase = this.aFirestore.collection<Articulo>('articulos');
+    this.articulosFirebase = this.coleccionFirebase.valueChanges();
+
+    
+
+    //this.articulosCollection = this.af.collection<Articulo>('articulos');
+    //this.arts = this.articulosCollection.valueChanges();
   }
 
+  ngOnInit(): void {
+
+   
+  }
+
+  
   articulos: any = [
     {
       id: 1,
@@ -42,8 +76,10 @@ export class ArticulosComponent implements OnInit {
   carro: number = 0;
 
   agregarCarrito(){
-    this.carro++;
+
+    this.carritoService.testService();
+    //this.carro++;
   }
-  
-  
+
+
 }
