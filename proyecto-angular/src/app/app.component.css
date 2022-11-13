@@ -1,0 +1,32 @@
+.derecha {
+    float: right;
+    padding-right: 20px;
+    color: white;
+    font-size: 25px;
+}
+
+ion-toolbar {
+    --background: #aa4465;
+    /*#f72585;*/
+    --color: white;
+}
+
+a {
+    color: #9e0059;
+    /*#b5179e;*/
+}
+
+p,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: white;
+}
+
+ion-menu-button {
+    --color: white;
+}
