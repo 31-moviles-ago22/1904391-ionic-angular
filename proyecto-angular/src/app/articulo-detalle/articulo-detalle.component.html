@@ -7,17 +7,20 @@
     <ion-row>
         <ion-col size="12" size-md="5">
             <ion-card>
+
                 <ion-card-content>
-                    <p>{{articuloDetalle.nombre}}</p>
-                    <ion-img [src]="articuloDetalle.imagen"></ion-img>
+                    <p>{{ (articuloDetalle | async)?.nombre }}</p>
+                    <!--<ion-img [src]="articuloConsulta.imagen"></ion-img>-->
 
                 </ion-card-content>
 
             </ion-card>
         </ion-col>
         <ion-col size="12" offset-md="1" size-md="2">
-            <h2>Comprar {{articuloDetalle.nombre}}</h2>
-            <p>${{articuloDetalle.precio}}</p>
+
+            <h2>Comprar {{ (articuloDetalle | async)?.nombre }}</h2>
+            <p>${{ (articuloDetalle | async)?.precio }}</p>
+
         </ion-col>
         <ion-col size="12" offset-md="1" size-md="2">
             <p>Entrega <strong>GRATIS</strong> hoy </p>
@@ -30,8 +33,8 @@
                     </ion-select>
                 </ion-item>
             </ion-list>
-            <p>Vas a agregar<strong> {{cantidad}}</strong></p>
-            <ion-button shape="round" color="tertiary" (click)="agregarCarrito()">
+            <p>Vas a agregar<strong></strong></p>
+            <ion-button shape="round" color="tertiary">
                 Agregar al carrito
 
             </ion-button>
@@ -44,9 +47,9 @@
     <ion-row>
         <ion-col>
             <h2>Reviews</h2>
-            <p class="review" *ngFor="let review of articuloDetalle.reviews">
+            <!-- <p class="review" *ngFor="let review of articuloDetalle.reviews">
                 {{review}}
-            </p>
+            </p>-->
         </ion-col>
     </ion-row>
 </ion-grid>

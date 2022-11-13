@@ -13,5 +13,6 @@ export class CarritoComponent implements OnInit {
   }
 
   @Input() carrito: number = 0;
+  @Input() articulo: any;
   
 }
