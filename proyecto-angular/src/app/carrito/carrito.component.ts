@@ -12,5 +12,6 @@ export class CarritoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @Input() public carrito: number = 0;
+  @Input() carrito: number = 0;
+  
 }

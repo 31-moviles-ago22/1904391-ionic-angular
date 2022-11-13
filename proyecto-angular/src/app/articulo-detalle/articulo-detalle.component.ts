@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Event } from '@angular/router';
 
 @Component({
   selector: 'app-articulo-detalle',
@@ -70,8 +70,15 @@ export class ArticuloDetalleComponent implements OnInit {
 
   carro : number = 0;
   cantidad: number = 1;
+  @Output() carroCopia: number = 0;
 
   agregarCarrito(){
-    this.carro++;
+    
+    let total = this.carro + this.cantidad;
+    this.carro = total;
+  }
+
+  seleccionarCantidad(ev: any){
+    this.cantidad = parseInt(ev.target.value);
   }
 }

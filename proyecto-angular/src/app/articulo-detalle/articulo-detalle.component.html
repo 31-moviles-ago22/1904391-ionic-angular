@@ -23,13 +23,14 @@
             <p>Entrega <strong>GRATIS</strong> hoy </p>
             <ion-list>
                 <ion-item>
-                    <ion-select interface="popover" placeholder="Cantidad">
+                    <ion-select interface="popover" placeholder="Cantidad" (ionChange)="seleccionarCantidad($event)">
                         <ion-select-option value="1">1</ion-select-option>
                         <ion-select-option value="2">2</ion-select-option>
                         <ion-select-option value="3">3</ion-select-option>
                     </ion-select>
                 </ion-item>
             </ion-list>
+            <p>Vas a agregar<strong> {{cantidad}}</strong></p>
             <ion-button shape="round" color="tertiary" (click)="agregarCarrito()">
                 Agregar al carrito
 
