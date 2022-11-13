@@ -1,6 +1,11 @@
 <ion-grid>
     <ion-row>
-        <ion-col size="4">
+        <ion-col>
+            <app-carrito [carrito]="carro"></app-carrito>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col size="12" size-md="5">
             <ion-card>
                 <ion-card-content>
                     <p>{{articuloDetalle.nombre}}</p>
@@ -10,11 +15,11 @@
 
             </ion-card>
         </ion-col>
-        <ion-col size="4">
+        <ion-col size="12" offset-md="1" size-md="2">
             <h2>Comprar {{articuloDetalle.nombre}}</h2>
             <p>${{articuloDetalle.precio}}</p>
         </ion-col>
-        <ion-col size="3">
+        <ion-col size="12" offset-md="1" size-md="2">
             <p>Entrega <strong>GRATIS</strong> hoy </p>
             <ion-list>
                 <ion-item>
@@ -25,8 +30,14 @@
                     </ion-select>
                 </ion-item>
             </ion-list>
-            <ion-button>Agregar al carrito</ion-button>
-            <ion-button>Comprar ya</ion-button>
+            <ion-button shape="round" color="tertiary" (click)="agregarCarrito()">
+                Agregar al carrito
+
+            </ion-button>
+            <ion-button shape="round" color="warning">
+                Comprar ya
+
+            </ion-button>
         </ion-col>
     </ion-row>
     <ion-row>

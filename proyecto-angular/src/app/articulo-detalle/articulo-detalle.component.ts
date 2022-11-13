@@ -12,6 +12,8 @@ export class ArticuloDetalleComponent implements OnInit {
 
   ngOnInit(): void {
     this.buscarArticulo();
+
+    
   }
 
   articulos: any = [
@@ -66,4 +68,10 @@ export class ArticuloDetalleComponent implements OnInit {
     }
   }
 
+  carro : number = 0;
+  cantidad: number = 1;
+
+  agregarCarrito(){
+    this.carro++;
+  }
 }
