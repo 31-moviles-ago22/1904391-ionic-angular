@@ -1,13 +1,27 @@
 <ion-grid>
     <ion-row>
+        <ion-col>
+
+            <app-carrito [carrito]="carro"></app-carrito>
+        </ion-col>
+    </ion-row>
+    <ion-row>
 
         <ion-col size="12" size-md="3" *ngFor="let articulo of articulos">
-            <p>{{articulo.nombre}}</p>
-            <a [routerLink]="['/detalle', articulo.id]">
-                <img [src]="articulo.imagen" alt="{{articulo.nombre}}">
-            </a>
-            <p class="precio">${{articulo.precio}}</p>
-            <ion-button>Agregar al Carrito</ion-button>
+            <ion-card>
+                <ion-card-header>
+                    <p>{{articulo.nombre}}</p>
+                </ion-card-header>
+                <ion-card-content>
+
+                    <a [routerLink]="['/detalle', articulo.id]">
+                        <img [src]="articulo.imagen" alt="{{articulo.nombre}}">
+                    </a>
+                    <p class="precio">${{articulo.precio}}</p>
+                    <ion-button (click)="agregarCarrito()">Agregar al Carrito</ion-button>
+                </ion-card-content>
+
+            </ion-card>
         </ion-col>
 
     </ion-row>
