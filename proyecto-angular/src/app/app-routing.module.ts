@@ -19,7 +19,7 @@ const rutas : Routes = [
     },
     {
         path: '',
-        redirectTo: '/articulos', 
+        redirectTo: '/inicio', 
         pathMatch: 'full'
     }
 ]
