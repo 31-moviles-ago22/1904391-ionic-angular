@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ArticulosComponent } from './articulos/articulos.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { ArticuloDetalleComponent } from './articulo-detalle/articulo-detalle.component';
+import { CarritoComponent } from './carrito/carrito.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ArticuloDetalleComponent } from './articulo-detalle/articulo-detalle.co
     EncabezadoComponent,
     ArticulosComponent,
     InicioComponent,
-    ArticuloDetalleComponent
+    ArticuloDetalleComponent,
+    CarritoComponent
   ],
   imports: [
     BrowserModule,
