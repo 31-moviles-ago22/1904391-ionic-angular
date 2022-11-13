@@ -24,7 +24,7 @@ export class ArticulosComponent implements OnInit {
   private coleccionFirebase: AngularFirestoreCollection<Articulo>;
   articulosFirebase: Observable<Articulo[]>;
 
-  private test: AngularFirestoreCollection<Articulo>;
+  //private test: AngularFirestoreCollection<Articulo>;
 
   constructor(
     private carritoService : AgregarCarritoService,
