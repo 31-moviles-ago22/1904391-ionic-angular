@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ArticulosComponent } from './articulos/articulos.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { ArticuloDetalleComponent } from './articulo-detalle/articulo-detalle.component';
+import { DonutComponent } from './donut/donut.component';
 
 const rutas : Routes = [
     {
@@ -16,6 +17,10 @@ const rutas : Routes = [
     {
         path: 'detalle/:id',
         component: ArticuloDetalleComponent 
+    },
+    {
+        path: 'donut', 
+        component: DonutComponent
     },
     {
         path: '',

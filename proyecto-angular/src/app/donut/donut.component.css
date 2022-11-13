@@ -1,0 +1,86 @@
+/*Classes*/
+
+.donut-hole {}
+
+
+/*WIP*/
+
+.donut-ring {}
+
+
+/*WIP*/
+
+.donut-segment {}
+
+
+/*WIP*/
+
+.donut-chart svg circle {
+    border: solid 3px white;
+}
+
+.donut-chart p {
+    flex: 1 1 100%;
+}
+
+.donut-chart svg {
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
+}
+
+.donut-chart__vignette {
+    display: inline-block;
+    width: 50%;
+}
+
+.donut-chart_title {
+    font-family: 'Arial';
+    margin: 2.5rem 0 10px 0;
+}
+
+.donut-chart .donut-vignette-text {
+    font-family: "Arial";
+}
+
+.donut-chart .donut-text {
+    fill: #000;
+    -moz-transform: translateY(0.25em);
+    -ms-transform: translateY(0.25em);
+    -webkit-transform: translateY(0.25em);
+    transform: translateY(0.25em);
+}
+
+.donut-chart .donut-number {
+    font-size: 2px;
+    line-height: 1;
+    text-anchor: middle;
+    -moz-transform: translateY(-0.25em);
+    -ms-transform: translateY(-0.25em);
+    -webkit-transform: translateY(-0.25em);
+    transform: translateY(-0.25em);
+}
+
+.donut-chart {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    border: solid 1px color('slate');
+    border-radius: 8px;
+    margin: 1.5rem 0;
+}
+
+.donut-chart .donut-label {
+    font-size: 2px;
+    text-transform: uppercase;
+    text-anchor: middle;
+    -moz-transform: translateY(0.7em);
+    -ms-transform: translateY(0.7em);
+    -webkit-transform: translateY(0.7em);
+    transform: translateY(0.7em);
+}
+
+.donut-chart figure svg {
+    display: inline;
+    vertical-align: top;
+}

@@ -10,6 +10,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { ArticuloDetalleComponent } from './articulo-detalle/articulo-detalle.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { FormsModule } from '@angular/forms';
+import { DonutComponent } from './donut/donut.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     ArticulosComponent,
     InicioComponent,
     ArticuloDetalleComponent,
-    CarritoComponent
+    CarritoComponent,
+    DonutComponent
   ],
   imports: [
     BrowserModule,
