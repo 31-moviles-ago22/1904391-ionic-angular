@@ -3,15 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   useEmulators: false,
   firebaseConfig : {
-    apiKey: "AIzaSyCFcAUhrPj8kT3EB2g3IQgaSYV7vHhhXj0",
-    authDomain: "tienda-moviles31.firebaseapp.com",
-    projectId: "tienda-moviles31",
-    storageBucket: "tienda-moviles31.appspot.com",
-    messagingSenderId: "176929845436",
-    appId: "1:176929845436:web:9687fad3db7785943020b9"
+    apiKey: "AIzaSyAtjND4rxDtldkj4r6_0ThUKDnjXkltb1g",
+    authDomain: "tienda-moviles-46595.firebaseapp.com",
+    projectId: "tienda-moviles-46595",
+    storageBucket: "tienda-moviles-46595.appspot.com",
+    messagingSenderId: "1089488127273",
+    appId: "1:1089488127273:web:e659d014948df105aa2338",
   }
 };
 
