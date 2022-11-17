@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  useEmulators: false,
   firebaseConfig : {
     apiKey: "AIzaSyCFcAUhrPj8kT3EB2g3IQgaSYV7vHhhXj0",
     authDomain: "tienda-moviles31.firebaseapp.com",

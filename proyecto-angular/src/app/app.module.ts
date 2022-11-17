@@ -15,8 +15,11 @@ import { initializeApp } from "firebase/app";
 import { AngularFireModule } from '@angular/fire/compat';
 
 import { environment } from 'src/environments/environment';
+import {AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
 
 const app = initializeApp(environment.firebaseConfig);
+
+
 
 @NgModule({
   declarations: [
@@ -29,12 +32,13 @@ const app = initializeApp(environment.firebaseConfig);
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule,
     IonicModule.forRoot()
   ],
-  providers: [],
+  providers: [{ provide: BUCKET, useValue: '' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

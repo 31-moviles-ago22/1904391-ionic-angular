@@ -3,18 +3,34 @@
         <ion-col>
 
             <app-carrito [carrito]="carro"></app-carrito>
+            <h3>Subir foto</h3>
+            <input type="file" (change)="subirFoto($event)">
+
+
+            <!---
+             <div *ngIf="(porcentaje$ | async ) as porcentaje">
+                <ion-progress-bar [value]="porcentaje"></ion-progress-bar> 
+            </div>
+         -->
+
+            <ion-progress-bar [value]="progress"></ion-progress-bar>
         </ion-col>
     </ion-row>
 
     <!--Articulos de la base de datos de Firebase-->
-    <div *ngFor="let articuloFirebase of articulosFirebase | async ">
-        {{articuloFirebase.nombre}} <br> {{articuloFirebase.precio}} <br>
+    <!--
+     <div *ngFor="let articuloFirebase of articulosFirebase | async ">
+        {{articuloFirebase.nombre}} <br>
+
+        {{articuloFirebase.precio}} <br>
     </div>
+   -->
 
 
     <!--Articulos locales-->
     <ion-row>
-        <ion-col size="12" size-md="3" *ngFor="let articulo of articulosColeccionFb">
+        <ion-col size="12" size-md="3" *ngFor="let articulo of articulosFirebase | async">
+            <!--"let articulo of articulosColeccionFb"-->
             <ion-card>
                 <ion-card-header>
                     <p>{{articulo.nombre}}</p>

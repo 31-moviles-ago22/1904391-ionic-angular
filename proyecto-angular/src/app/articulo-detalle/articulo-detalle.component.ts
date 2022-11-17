@@ -4,6 +4,8 @@ import { ActivatedRoute, Event } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Articulo, ArticuloDetalle } from '../articulo.model';
 
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+
 @Component({
   selector: 'app-articulo-detalle',
   templateUrl: './articulo-detalle.component.html',
@@ -15,8 +17,12 @@ export class ArticuloDetalleComponent implements OnInit {
   idArticulo: string;
   articuloDetalle: Observable<ArticuloDetalle|undefined>;
 
+  //storage
+  meta : Observable<any>;
+
   constructor(private ruta: ActivatedRoute,
     private af: AngularFirestore, 
+    private storage : AngularFireStorage
     ) { 
       this.idArticulo =  this.ruta.snapshot.params['id'];
       
@@ -24,12 +30,18 @@ export class ArticuloDetalleComponent implements OnInit {
 
      
       this.articuloDetalle = this.articuloConsulta.valueChanges();
+
+      //storage
+      const ref = this.storage.ref('articulos');
+      this.meta = ref.getMetadata();
     }
 
   ngOnInit(): void {
 
     console.log(this.articuloConsulta);
     //this.buscarArticulo();
+
+    console.log(this.meta);
 
   }
 

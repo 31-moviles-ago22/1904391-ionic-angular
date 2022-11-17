@@ -9,6 +9,7 @@
             <ion-card>
 
                 <ion-card-content>
+                    <!--  <p><pre><code>{{ meta | async }}</code></pre></p> -->
                     <p>{{ (articuloDetalle | async)?.nombre }}</p>
                     <!--<ion-img [src]="articuloConsulta.imagen"></ion-img>-->
 
@@ -16,6 +17,7 @@
 
             </ion-card>
         </ion-col>
+
         <ion-col size="12" offset-md="1" size-md="2">
 
             <h2>Comprar {{ (articuloDetalle | async)?.nombre }}</h2>

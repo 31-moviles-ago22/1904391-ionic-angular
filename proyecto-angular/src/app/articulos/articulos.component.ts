@@ -7,6 +7,9 @@ import { Observable, of } from 'rxjs';
 
 import { Articulo } from '../articulo.model';
 
+
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+
 @Component({
   selector: 'app-articulos',
   templateUrl: './articulos.component.html',
@@ -36,8 +39,8 @@ export class ArticulosComponent implements OnInit {
 
   constructor(
     private carritoService : AgregarCarritoService,
-    private aFirestore: AngularFirestore
-
+    private aFirestore: AngularFirestore,
+    private aFireStorage: AngularFireStorage
   ) { 
     this.coleccionFirebase = this.aFirestore.collection<Articulo>('articulos');
     this.articulosFirebase = this.coleccionFirebase.valueChanges();
@@ -45,30 +48,61 @@ export class ArticulosComponent implements OnInit {
     
     //this.articulosCollection = this.af.collection<Articulo>('articulos');
     //this.arts = this.articulosCollection.valueChanges();
+
+
+    const ref = this.aFireStorage.storage;
   }
 
   articulosColeccionFb: Articulo[] = [];
 
   ngOnInit(): void {
 
-    //this.observaVar.subscribe(this.obserVaCambios);
-
-
-   
     console.log(this.coleccionFirebase.valueChanges({idField: 'id'}).subscribe(res => {
       this.articulosColeccionFb = res;
     }));
     
     this.articulosFirebase.subscribe(res => {
       
-    })
+    });
   }
 
   ngOnDestroy() {
     this.articulosColeccionFb = [];
-   
   }
 
+  cargarFotos(){
+
+  }
+
+  porcentaje$ : Observable<number>;
+  progress : number | undefined;
+  subirFoto(event: any){
+    //Sube foto del input de File
+    const archivo: File = event.target.files[0];
+    console.log(archivo.name);
+
+    const pathArchivo = `${archivo.name}` // ${this.articulo} // necesitamos un folder por articulo
+
+
+    const task = this.aFireStorage.upload(pathArchivo, archivo);
+
+     task.percentageChanges().subscribe(res => {
+      this.progress = res;
+     });
+
+    //this.progress = porcentaje$;
+
+   /*  setInterval(() => {
+      this.progress += 0.01;
+      if (this.progress > 1) {
+        setTimeout(() => {
+          this.progress = 0;
+        }, 1000);
+      }
+    }, 50); */
+
+    task.snapshotChanges().subscribe();
+  }
   articulos: any = [
     {
       id: 1,
@@ -106,6 +140,4 @@ export class ArticulosComponent implements OnInit {
 
     this.carritoService.testService();
   }
-
-
 }
