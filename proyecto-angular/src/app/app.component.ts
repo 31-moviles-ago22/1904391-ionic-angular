@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SesionService } from './sesion.service';
 
 @Component({
   selector: 'app-root',
@@ -6,7 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'proyecto-angular';
+  title = '1FM045-ionic-angular';
+
+  constructor(public s : SesionService) {
+    
+  }
 
   
 }

@@ -11,6 +11,7 @@
                 <ion-card-content>
                     <!--  <p><pre><code>{{ meta | async }}</code></pre></p> -->
                     <p>{{ (articuloDetalle | async)?.nombre }}</p>
+                    <img [src]="(articuloDetalle | async)?.img !| getDownloadURL" alt="{{(articuloDetalle | async)?.nombre }}">
                     <!--<ion-img [src]="articuloConsulta.imagen"></ion-img>-->
 
                 </ion-card-content>

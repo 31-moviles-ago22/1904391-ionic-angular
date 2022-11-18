@@ -2,7 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { ActivatedRoute, Event } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Articulo, ArticuloDetalle } from '../articulo.model';
+import { Articulo, ArticuloDetalle } from '../../articulo.model';
 
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
@@ -38,7 +38,9 @@ export class ArticuloDetalleComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.articuloConsulta);
+    this.articuloConsulta.valueChanges().subscribe(res => {
+      console.log(res);
+    });
     //this.buscarArticulo();
 
     console.log(this.meta);

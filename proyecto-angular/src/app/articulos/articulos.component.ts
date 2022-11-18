@@ -43,7 +43,7 @@ export class ArticulosComponent implements OnInit {
     private aFireStorage: AngularFireStorage
   ) { 
     this.coleccionFirebase = this.aFirestore.collection<Articulo>('articulos');
-    this.articulosFirebase = this.coleccionFirebase.valueChanges();
+    this.articulosFirebase = this.coleccionFirebase.valueChanges({idField: 'id'});
     this.articuloDoc = this.aFirestore.doc<Articulo>('/articulos/KyPraPRLoHbek3pEt0kk');
     
     //this.articulosCollection = this.af.collection<Articulo>('articulos');
@@ -57,13 +57,10 @@ export class ArticulosComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.coleccionFirebase.valueChanges({idField: 'id'}).subscribe(res => {
+    /* console.log(this.coleccionFirebase.valueChanges({idField: 'id'}).subscribe(res => {
       this.articulosColeccionFb = res;
-    }));
-    
-    this.articulosFirebase.subscribe(res => {
-      
-    });
+    })); */
+   
   }
 
   ngOnDestroy() {
@@ -103,32 +100,7 @@ export class ArticulosComponent implements OnInit {
 
     task.snapshotChanges().subscribe();
   }
-  articulos: any = [
-    {
-      id: 1,
-      nombre: "Gorra", 
-      imagen: 'assets/imagenes/gorra.jpg',
-      precio: 299
-    },
-    {
-      id: 2,
-      nombre: "Taza", 
-      imagen: 'assets/imagenes/taza.jpg',
-      precio: 199
-    },
-    {
-      id: 3,
-      nombre: "Camiseta", 
-      imagen: 'assets/imagenes/playera.jpg',
-      precio: 199
-    },
-    {
-      id: 4,
-      nombre: "Bolsa", 
-      imagen: 'assets/imagenes/bolsa.jpg',
-      precio: 99
-    }
-  ];
+  
 
   carro: number = 0;
 
